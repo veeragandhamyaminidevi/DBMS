@@ -1,0 +1,56 @@
+1. find the top three salaries and theire name from instructor table
+select name,salary from instructor i where 3>(select count(*) from instructor where i.salary<salary);
+output:
+NAME                     SALARY
+-------------------- ----------
+Wu                        90000
+Einstein                  95000
+Brandt                    92000
+
+
+2.find the least three earners from the instructor table
+select name,salary from instructor i where 3>(select count(*) from instructor where i.salary>salary);
+OUTPUT:
+NAME                     SALARY
+-------------------- ----------
+Mozart                    40000
+El Said                   60000
+Califieri                 62000
+
+3.find the name and salary of the instructor having max salary 
+select name,salary from instructor where salary in(select max(salary) from  instructor);
+OUTPUT:
+NAME                     SALARY
+-------------------- ----------
+Einstein                  95000
+
+4.find the name and salary of the instructor having least salary
+select name,salary from instructor where salary in(select min(salary) from  instructor);
+OUTPUT:
+NAME                     SALARY
+-------------------- ----------
+Mozart                    40000
+
+
+5.find the second highest salary and name from the instructors
+select name,salary from instructor where salary in
+(select max(salary) from instructor where salary not in (select max(salary) from instructor));
+(or)
+select name,salary from instructor i where 2=(select count(*) from instructor where i.salary<=salary);
+OUTPUT:
+NAME                     SALARY
+-------------------- ----------
+Brandt                    92000
+
+
+6.find the 2 least salary  and name from the instructor
+select name,salary from instructor i where 2=(select count(*) from instructor where i.salary>=salary);
+or
+select name,salary from instructor where salary in
+(select min(salary) from the instructor where salary not in (select min(salary) from instructor));
+OUTPUT:
+NAME                     SALARY
+-------------------- ----------
+El Said                   60000
+
+
